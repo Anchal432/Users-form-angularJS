@@ -1,0 +1,174 @@
+<body>
+  <!-- modal  -->
+  <script type="text/ng-template" id="myModalContent.html">
+    <div id="modal-start" >
+        <div class="modal-header" >
+            <h3 class="title">New User Detail</h3>
+            <i class="fa-solid fa-xmark close-btn" ng-click="closeModal()"></i>
+        </div>
+        <br>
+
+        <form >
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                <label for="firstname"> Name <i class="fa-solid fa-asterisk star"></i> </label>
+                <input type="firstname" class="form-control" ng-model="ngName"  id="firstname" placeholder="Name">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email <i class="fa-solid fa-asterisk star"></i></label>
+                    <input type="text" class="form-control" ng-model="ngEmail" id="inputEmail" placeholder="Email" >
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPhone"> Phone <i class="fa-solid fa-asterisk star"></i> </label>
+                    <input type="type" class="form-control" ng-model="ngPhone" id="inputPhone" placeholder="Phone" maxlength="10">   <!-- maxlength="10" pattern="[0-9]{10}"  -->
+                </div>
+                <div class="col-md-6">
+                    <label for="dateOfBirth"> DOB <i class="fa-solid fa-asterisk star"></i> </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputAddress"> Address </label>
+                    <input type="address" class="form-control " ng-model="ngAddress"  id="inputAddress" placeholder="Address">
+                </div>
+            </div>
+            <div style="display:inline">
+                <div class="col-md-4"><label for="languages"> Languages: </label></div>
+                <div class="form-group col-md-8" ng-model="ngLanguages" ><ui-select multiple theme="select2" ng-disabled="disabled" style="width: 40.7em; border-radius: 4px;">
+                    <ui-select-match  placeholder="Select languages">{{$item}}</ui-select-match>
+                    <ui-select-choices repeat="language in availableLanguages | filter:$select.search" >
+                    {{language}}
+                    </ui-select-choices>
+                </ui-select></div>
+            </div>
+
+            <div class="form-row" >
+                <label class="col-md-4" for="gender" > Gender <i class="fa-solid fa-asterisk star"></i> </label>
+                <div class="radioBtns col-md-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" ng-model="gender" name="exampleRadios" id="exampleRadios1" value="Male">
+                    <label class="form-check-label" for="exampleRadios1">
+                    Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" ng-model="gender" name="exampleRadios" id="exampleRadios2" value="Female">
+                    <label class="form-check-label" for="exampleRadios2">
+                    Female
+                    </label>
+                </div>
+                </div>
+            </div>
+
+            <!---------------- Educational details ------------------->
+            <div class="eduDetails col-md-12" >
+                <h4 class="edu-title">Educational Details</h4>
+            </div>
+
+            <div class="edu-sec col-md-12" style="padding-top:10px; display:flex;" ng-repeat="detail in details" >
+
+                <div class="form-group col-md-2">
+                <label for="degree"> Degree </label>
+                <input type="text" class="form-control " ng-model="detail.degree"  id="inputDegree">
+                </div>
+
+
+                <div class="form-group col-md-2">
+                    <label for="inputInstitute">Institute</label>
+                    <input type="text" class="form-control" ng-model="detail.institute" id="inputInstitute">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="startDate"> Start Date </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="detail.startDate" is-open="detail.popupOpened.popup2" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="endDate"> End Date </label>
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="detail.endDate" is-open="detail.popupOpened.popup3" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open3($index)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputPercentage">Percentage</label>
+                    <input type="number" class="form-control" ng-model="detail.percentage" min="0" max="100" id="inputPercentage"  >
+                </div>
+
+                <div class="form-group col-md-1">
+                    <!-- <label>...</label> -->
+                    <!-- <button type="button" ng-click="addRow()" id="addBtn" style="margin-top: 26px;"  ng-hide="hideAdd"> Add </button>
+                    <button type="button" ng-click="deleteRow($index)" id="addBtn" style="margin-top: 26px;"  ng-if="showRemove"> Remove </button> -->
+                    <div ng-if="$last">
+                        <button ng-click="addRow($index)" class="btn btn-style" style="margin-top: 26px;">Add</button>
+                    </div>
+                    <div ng-if="!$last">
+                        <button type="button" style="margin-top: 26px;" class="btn btn-style" ng-click="deleteRow($index)">Remove</button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <div class="eduDetails col-md-12" >
+                <h4 class="edu-title">Skills</h4>
+            </div>
+            <div class=" skill-sec col-md-12">
+                <button type="button" class="btn1 col-md-4" ng-click="clickDeveloping()">Developing</button>
+                <button type="button" class="btn1 col-md-3" ng-click="clickDesigning()">Designing</button>
+                <button type="button" class="btn1 col-md-4" ng-click="clickTesting()">Testing</button>
+                <!-- <div class="slider col-md-8" >
+                    <rzslider rz-slider-model="slider.value"
+                    rz-slider-options="slider.options"></rzslider>
+                    <rzslider rz-slider-model="minSlider.value"></rzslider>
+                </div> -->
+                <div class="slider col-md-8" ng-show="flag1==true">
+                    <rzslider ng-model= "slider1" rz-slider-model="slider1.value"
+                      rz-slider-options="slider1.options"></rzslider>            
+                  </div>       
+                  <div class="slider col-md-8" ng-show="flag2==true">
+                     <rzslider ng-model="slider2" rz-slider-model="slider2.value"
+                      rz-slider-options="slider2.options"></rzslider>
+                  </div>
+                  <div class="slider col-md-8" ng-show="flag3==true">
+                    <rzslider ng-model="slider3" rz-slider-model="slider3.value"
+                      rz-slider-options="slider3.options"></rzslider>
+                  </div>
+            </div>
+ 
+            <!-- <button class="btn btn-primary"  ng-click="pop()">Show toasts</button> -->
+            
+            <div class="col-md-3 add-close-btn" style="float:right" >
+                <button class="btn btn-style btn-primary" ng-click="ok()" >Add Data</button>
+                <button class="btn btn-style" ng-click="closeModal()">Close</button>
+            </div>
+        
+
+            <!-- <toaster-container toaster-options="{'close-button':false, 'position-class': 'toast-top-right', 'time-out':{ 'toast-warning': 2000, 'toast-error': 0 } }"></toaster-container> -->
+            <script type="text/ng-template" id="myTemplateWithData.html"></script>
+        </form>
+
+
+    </div>
+  </script>
+  <!-- modal end -->
+</body>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>Document</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.19.8/select.min.js"
+      integrity="sha512-IO99nu6TitXdydITTnjerPUo0HffdgLC9yIfv5gwglcsSR7nN008a7QDynI5Ih0mGLlnNnt8tGIuBCFRZaNjqw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- toaster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/2.1.0/toaster.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/2.1.0/toaster.css" rel="stylesheet" />
+
+    <!-- rzslider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/7.1.0/rzslider.css" integrity="sha512-IiqAAUGefx8EOzAreiZM5bfpz/fYwENZcbzF3GvlBKhaePQXCCzVn0UtsNRdIFzfZ/R1Ii4xjMYVdUimVbCIUQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/7.1.0/rzslider.js" integrity="sha512-PvYHTh0uxQn8NYDxX54D258c30qKT8OAPrWUVc+dQNRvHmBeIJMFfDULuS0vYD6TlSi37jVkzm9Ru1JjPrubSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
+    <script src="https://rawgit.com/rzajac/angularjs-slider/master/dist/rzslider.js"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Export csv  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js" integrity="sha512-O3MYc5FH8/8IRYvJDbSb+IUAzSLVUhuUnFwwf523KYz6chGU5VgRTH7tAeWlJM/x1OnlS+vnZqMe7Z3b76huEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.js" integrity="sha512-7FZ8/zFqtlmtyx6pnX5Oii3xpX1WTQWDzaY1ThNX5tDTKfUjvK9KVbqGRzoFiN4GPYXt26AlnSEdUbvWEenk3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- canvas chartjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.0.0/angular-chart.js"></script>
+
+
+    <!-- modal script -->
+    <script src="script.js"></script> 
+    <script src="modal.js"></script>
+    <script src="deleteModal.js"></script>
+    <script src="carousel.js"></script>
+
+  </head>
+  <body ng-app="myModule" ng-controller="myController">
+    <!-- header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-users logo icon"></i></div>
+      <div class="heading">
+        <h3 style="font-weight: 350">User Management System</h3>
+      </div>
+      <div class="add-user" ng-click="open()">
+        <i class="fa-solid fa-user-plus"></i>Add User
+      </div>
+    </div>
+
+    </div>
+    
+    <br />
+
+    <!-- table -->
+    <div class="container">
+      <div class="table-heading">
+        <p style="padding: 4px; font-size: 15px">User data list</p>
+      </div>
+      <input
+        type="text"
+        placeholder="Search..."
+        ng-model="searchText"
+        ng-change="searchLength((userlist | filter:searchText).length)"
+        style="width: 100%; height: 27px; margin-top: 2%"
+      />
+      <br />
+      <br />
+      
+      <div>
+        View
+      <input
+        type="number"
+        step="1"
+        min="0"
+        max="{{totalItems}}"
+        ng-model="rowLimit"
+        style="height: 30px; width: 65px;"
+        ng-change="pagination()"
+      />
+      records at a time.
+
+      <button class="btn btn-primary" style="float:right" ng-csv="exportData()" csv-header="getHeader()" filename="tableData.csv" >Export</button>  
+    </div>
+      
+      <br />
+      <div>
+        <div id="table-data" class="table-div">
+          <table class="main_data">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Edit/Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                ng-repeat="user in userlist | filter:searchText | startFrom:begin |  limitTo:rowLimit" ng-class= "{'softDlt': user.flag==false }" 
+              >
+                <td ng-click="callingMe(user.id)">{{user.name}}</td>
+                <td ng-click="callingMe(user.id)">{{user.email}}</td>
+                <td ng-click="callingMe(user.id)">{{user.phone}}</td>
+                <td ng-if="user.gender == 'Male' " ng-click="callingMe(user.id)">
+                  &nbsp; <i class="fa-solid fa-person"></i>
+                </td>
+                <td ng-if="user.gender == 'Female' " ng-click="callingMe(user.id)">
+                  &nbsp; <i class="fa-solid fa-person-dress"></i>
+                </td>
+                <td ng-click="callingMe(user.id)">{{getAge(user.dob)}}</td>
+                <td ng-if="user.editDelete == '' ">
+                  <i class="fa-solid fa-pen-to-square" ng-show="user.flag==true" ng-click="editFunc(user.id)"></i> &nbsp;
+                  <i class="fa-solid fa-trash-can" ng-show="user.flag==true" ng-click="removeRow(user.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <br />
+        <!-- <p>{{totalEntries}}</p> -->
+        <toaster-container toaster-options="{'close-button':false, 'position-class': 'toast-top-right', 'time-out':{ 'toast-warning': 2000, 'toast-error': 0 } }"></toaster-container>
+        <script type="text/ng-template" id="addedData.html"></script>
+
+        <!-- pagination -->
+        <ul
+          uib-pagination
+          items-per-page="rowLimit"
+          total-items="totalItems"
+          ng-model="currentPage"
+          ng-change="pagination()"
+        ></ul>
+      </div>
+      <div class="chart">
+
+        <canvas id="pie" class="chart chart-pie"
+          chart-data="data"  chart-options="options" chart-legend="true" chart-labels="labels"  chart-colours="colors">
+        </canvas> 
+      </div>
+    </div>
+    <br><br>
+
+    <div ng-include="'mymodalcontent.html'"></div>
+    <footer class="mt-auto">
+      <div class="form-footer">
+        <p style="text-align: center">
+          No. of active users : {{(userlist | filter:searchText).length}}
+        </p>
+        <img src="logo.png" width="75px" height="60px" />
+      </div>
+    </footer>
+  </body>
+</html>
